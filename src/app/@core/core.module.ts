@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
@@ -105,32 +105,67 @@ export const NB_CORE_PROVIDERS = [
   ...NbAuthModule.forRoot({
 
     strategies: [
-      NbDummyAuthStrategy.setup({
+      NbPasswordAuthStrategy.setup({
         name: 'email',
-        delay: 3000,
+        token: {
+          class: NbAuthJWTToken,
+          key: 'user.token',
+        },
+        baseEndpoint: 'http://localhost:3000/api',
+        login: {
+          endpoint: '/users/login',
+          defaultErrors: ['Login/Email la combinacion es incorrecta'],
+          defaultMessages: ['You have been successfully logged in.'],
+        },
+        register: {
+          endpoint: '/users',
+        },
+        logout: {
+          method:'DELETE',
+          endpoint: '/users/logout',
+          redirect: { success: '/auth/login', failure: '/' }
+        },
+        requestPass: {
+          endpoint: '/auth/request-pass',
+        },
+        resetPass: {
+          endpoint: '/auth/reset-pass',
+        },
       }),
     ],
     forms: {
       login: {
-        socialLinks: socialLinks,
+        redirectDelay: 0,
+        showMessages: {
+          success: true,
+        },
       },
       register: {
-        socialLinks: socialLinks,
+        redirectDelay: 0,
+        showMessages: {
+          success: true,
+        },
       },
+      logout:{
+        redirectDelay: 0,
+      }
     },
+
+    
   }).providers,
 
   NbSecurityModule.forRoot({
     accessControl: {
-      guest: {
-        view: '*',
-      },
-      user: {
-        parent: 'guest',
-        create: '*',
-        edit: '*',
-        remove: '*',
-      },
+     
+        guest: {
+          view: ['news', 'comments'],
+        },
+      // user: {
+      //   parent: 'guest',
+      //   create: '*',
+      //   edit: '*',
+      //   remove: '*',
+      // },
     },
   }).providers,
 

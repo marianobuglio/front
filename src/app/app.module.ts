@@ -42,6 +42,7 @@ import {
     }),
     CoreModule.forRoot(),
   ],
+ 
   bootstrap: [AppComponent],
 })
 export class AppModule {

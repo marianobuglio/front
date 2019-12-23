@@ -6,18 +6,18 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RolService implements NbRoleProvider {
 
   constructor(private authService: NbAuthService) { }
 
   getRole(): Observable<string> {
+    console.log('holaa')
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          return token.isValid() ? token.getPayload()['rol'] : 'guest';
+          debugger
+          return token.isValid() ? token.getPayload()['role'] : 'guest';
         }),
       );
   }

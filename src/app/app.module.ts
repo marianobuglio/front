@@ -11,6 +11,7 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthGuard } from './auth-guard.service';
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -20,6 +21,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +44,7 @@ import {
     }),
     CoreModule.forRoot(),
   ],
- 
+  providers:[AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {

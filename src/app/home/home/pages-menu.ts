@@ -6,11 +6,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: '/pages/dashboard',
     home: true,
+    data: {
+      permission: 'view',
+      resource: 'pepito'
+    }
   },
   {
-    title: 'IoT Dashboard',
+    title: 'logIn',
     icon: 'home-outline',
-    link: '/pages/iot-dashboard',
+    link: '/auth/login',
+    data: {
+      permission: 'view',
+      resource: 'pepito'
+    }
   },
   {
     title: 'FEATURES',
@@ -42,6 +50,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/layout/tabs',
       },
     ],
+    data: {
+      permission: 'view',
+      resource: 'pepito'
+    }
   },
   {
     title: 'Forms',
@@ -87,6 +99,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/ui-features/search-fields',
       },
     ],
+    
   },
   {
     title: 'Modal & Overlays',

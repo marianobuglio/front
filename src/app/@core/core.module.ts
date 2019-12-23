@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
-
+import {RolService} from '../auth/services/rol.service'
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
   AnalyticsService,
@@ -92,12 +92,7 @@ const DATA_SERVICES = [
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
 ];
 
-export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role based on any auth flow
-    return observableOf('guest');
-  }
-}
+
 
 export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
@@ -126,10 +121,10 @@ export const NB_CORE_PROVIDERS = [
           redirect: { success: '/auth/login', failure: '/' }
         },
         requestPass: {
-          endpoint: '/auth/request-pass',
+          endpoint: '/users/reset-pass',
         },
         resetPass: {
-          endpoint: '/auth/reset-pass',
+          endpoint: '/users/reset-pass',
         },
       }),
     ],
@@ -157,24 +152,21 @@ export const NB_CORE_PROVIDERS = [
   NbSecurityModule.forRoot({
     accessControl: {
      
-        guest: {
-          view: ['news', 'comments'],
-        },
-      // user: {
-      //   parent: 'guest',
-      //   create: '*',
-      //   edit: '*',
-      //   remove: '*',
-      // },
+      guest: {
+          view: ['news', 'comments','user','pepito'],
+      },
+      supervisor: {
+        view: ['news', 'comments','user','pepito'],
+    },
     },
   }).providers,
 
   {
-    provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
+    provide: NbRoleProvider, useClass: RolService,
   },
   AnalyticsService,
   LayoutService,
-  PlayerService,
+  PlayerService, 
   StateService,
 ];
 

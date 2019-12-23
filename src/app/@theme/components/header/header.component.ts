@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { NbAuthJWTToken, NbAuthService, NbPasswordAuthStrategy, passwordStrategyOptions } from '@nebular/auth';
+import { Router } from '@angular/router'
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil, filter, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'ngx-header',
@@ -47,8 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private userService: UserData,
               private layoutService: LayoutService,
               private authService: NbAuthService,
+              private router : Router,
               private breakpointService: NbMediaBreakpointsService) {
-     
             
             
                 this.authService.onTokenChange()
@@ -56,6 +58,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                   debugger
                   if (token.isValid()) {
                     this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable 
+                  }else{
+                    router.navigate(['auth/login']);
                   }
           
                 });

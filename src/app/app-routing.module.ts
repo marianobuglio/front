@@ -1,5 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -8,17 +9,15 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { HomeComponent } from './home/home/home.component';
+import { HomeModule} from './home/home.module'
+
 
 const routes: Routes = [
-  // {
-  //   path: 'pages',
-  //   loadChildren: () => import('app/pages/pages.module')
-  //     .then(m => m.PagesModule),
-  // },
+
   {
-    path: 'home',
-    loadChildren: () => import('app/home/home.module')
-      .then(m => m.HomeModule),
+    path: '',
+    component:HomeComponent
   },
   {
     path: 'auth',
@@ -28,7 +27,7 @@ const routes: Routes = [
  
     
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },
 ];
 
@@ -37,7 +36,7 @@ const config: ExtraOptions = {
 };
 //
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(routes, config),HomeModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

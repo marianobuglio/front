@@ -2,19 +2,10 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'E-commerce',
-    icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
+    title: 'Configuración',
+    icon: 'settings-2-outline',
+    link: '/setting',
     home: true,
-    data: {
-      permission: 'view',
-      resource: 'pepito'
-    }
-  },
-  {
-    title: 'logIn',
-    icon: 'home-outline',
-    link: '/auth/login',
     data: {
       permission: 'view',
       resource: 'pepito'
@@ -50,10 +41,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/layout/tabs',
       },
     ],
-    data: {
-      permission: 'view',
-      resource: 'pepito'
-    }
   },
   {
     title: 'Forms',

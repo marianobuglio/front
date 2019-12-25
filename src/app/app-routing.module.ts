@@ -24,11 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('app/auth/auth.module')
       .then(m => m.AuthModule),
   },
- 
+
     
 
   { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: '' },
 ];
 
 const config: ExtraOptions = {

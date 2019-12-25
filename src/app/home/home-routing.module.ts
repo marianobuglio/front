@@ -7,6 +7,18 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    children:[
+      {
+        path: 'user',
+        loadChildren: () => import('app/user/user.module')
+          .then(m => m.UserModule),
+      },
+      {
+        path: 'setting',
+        loadChildren: () => import('app/setting/setting.module')
+          .then(m => m.SettingModule),
+      },
+    ]
   },
 ];
 

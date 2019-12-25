@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PruebaComponent } from './prueba.component'
+import { ListSettingComponent } from './list-setting/list-setting.component'
 const routes: Routes = [
   {
     path:'',
-    component:PruebaComponent
-   
+    component: ListSettingComponent
   }
 ];
 
@@ -13,4 +12,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PruebaRoutingModule { }
+export class SettingRoutingModule { }

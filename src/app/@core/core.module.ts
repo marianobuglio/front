@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
-import {RolService} from '../auth/services/rol.service'
+import {RolService} from '../auth/services/rol.service';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import {
   AnalyticsService,
@@ -118,7 +118,7 @@ export const NB_CORE_PROVIDERS = [
         logout: {
           method:'DELETE',
           endpoint: '/users/logout',
-          redirect: { success: '/auth/login', failure: '/' }
+          redirect: { success: '/auth/login', failure: '/' },
         },
         requestPass: {
           endpoint: '/users/reset-pass',
@@ -143,21 +143,18 @@ export const NB_CORE_PROVIDERS = [
       },
       logout:{
         redirectDelay: 0,
-      }
+      },
     },
-
-    
   }).providers,
 
   NbSecurityModule.forRoot({
-    accessControl: {
-     
+    accessControl: {     
       guest: {
-          view: ['news', 'comments','user','pepito'],
+        view: ['news', 'comments','user','pepito'],
       },
       supervisor: {
         view: ['news', 'comments','user','pepito'],
-    },
+      },
     },
   }).providers,
 
@@ -168,7 +165,7 @@ export const NB_CORE_PROVIDERS = [
   LayoutService,
   PlayerService, 
   StateService,
-];
+]
 
 @NgModule({
   imports: [

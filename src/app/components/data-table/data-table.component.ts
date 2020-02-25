@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-data-table',
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DataTableComponent implements OnInit {
   @Input() title:string
   @Input() header:Array<String>
-  constructor() { }
+  @Input() link:string
+  constructor(private router:Router) {
+    
+   }
 
   ngOnInit() {
+    console.log(this.link)
   }
 
 }
